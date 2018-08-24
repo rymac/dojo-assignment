@@ -23,15 +23,18 @@ class TaskList:
     def add_task(self, name, priority=0):
         self.append(Task(name, priority))
 
-    # Get n-th task
+    # Return n-th task
     def get(self, n):
         if n < 0:
             print("Error.")  # To be fixed.
 
         return self.tasks[n]
 
-    # Get n highest-priority tasks
+    # Return n highest-priority tasks
     def get_top(self, n):
+        if n < 1:
+            print("Error.")  # To be fixed.
+
         return TaskList(sorted(self.tasks, key=lambda t: t.priority, reverse=True)[:n])
 
     def get_top3(self):
