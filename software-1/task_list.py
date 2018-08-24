@@ -30,6 +30,7 @@ class TaskList:
 
         return self.tasks[n]
 
+    # Get n highest-priority tasks
     def get_top(self, n):
         return TaskList(sorted(self.tasks, key=lambda t: t.priority, reverse=True)[:n])
 
@@ -42,20 +43,21 @@ class TaskList:
 
 
 def main():
-    # test code
-
+    # Initialize
     task_list = TaskList()
     task_list.add_task("foo")
     task_list.add_task("bar", 10)
+
     task1 = Task("fizz")
     task2 = Task("buzz", 2)
     task_list.extend([task1, task2])
+
     task3 = Task("hoge", 3)
     task_list.append(task3)
 
     print("# 0-th task")
     task_list.get(0).print()
-    print("# change 0-th task's priority")
+    print("# change priority")
     task_list.tasks[0].set_priority(5)
     task_list.get(0).print()
 
