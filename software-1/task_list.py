@@ -1,9 +1,15 @@
+import sys
+
 class Task:
     def __init__(self, name = "", priority = 0):
         self.name = name
         self.priority = priority
 
     def set_priority(self, priority):
+        if priority <= 0:
+            print("Error.")  # To be fixed.
+            sys.exit(1)
+
         self.priority = priority
 
     def print(self):
@@ -28,13 +34,15 @@ class TaskList:
     def get(self, n):
         if n < 0:
             print("Error.")  # To be fixed.
+            sys.exit(1)
 
         return self.tasks[n]
 
-    # Return n highest-priority tasks
+    # Return 'n' number of highest-priority tasks
     def get_top(self, n):
         if n < 1:
             print("Error.")  # To be fixed.
+            sys.exit(1)
 
         top_tasks = sorted(self.tasks, key=lambda t: t.priority, reverse=True)[:n]
         task_list = TaskList()
