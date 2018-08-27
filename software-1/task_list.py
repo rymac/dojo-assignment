@@ -11,14 +11,15 @@ class Task:
 
 
 class TaskList:
-    def __init__(self, tasks=[]):
-        self.tasks = tasks
+    def __init__(self):
+        self.tasks = []
 
     def append(self, task):
         self.tasks.append(task)
 
+    # Not needed in homework.
     def extend(self, task_list):
-        self.tasks.extend(task_list)
+        self.tasks.extend(task_list.tasks)
 
     def add_task(self, name, priority=0):
         self.append(Task(name, priority))
@@ -35,7 +36,11 @@ class TaskList:
         if n < 1:
             print("Error.")  # To be fixed.
 
-        return TaskList(sorted(self.tasks, key=lambda t: t.priority, reverse=True)[:n])
+        top_tasks = sorted(self.tasks, key=lambda t: t.priority, reverse=True)[:n]
+        task_list = TaskList()
+        for task in top_tasks:
+            task_list.append(task)
+        return task_list
 
     def get_top3(self):
         return self.get_top(3)
@@ -45,23 +50,23 @@ class TaskList:
             t.print()
 
 
+
 def main():
     # Initialize
     task_list = TaskList()
     task_list.add_task("foo")
     task_list.add_task("bar", 10)
 
-    task1 = Task("fizz")
-    task2 = Task("buzz", 2)
-    task_list.extend([task1, task2])
+    task_list2 = TaskList()
+    task_list2.append(Task("fizz"))
+    task_list2.append(Task("buzz", 3))
+    task_list.extend(task_list2)
 
-    task3 = Task("hoge", 3)
-    task_list.append(task3)
 
     print("# 0-th task")
     task_list.get(0).print()
     print("# change priority")
-    task_list.tasks[0].set_priority(5)
+    task_list.get(0).set_priority(5)
     task_list.get(0).print()
 
     print()
