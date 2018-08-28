@@ -31,12 +31,19 @@ class TaskList:
         self.append(Task(name, priority))
 
     # Return n-th task
-    def get(self, n):
-        if n < 0:
+    def get_by_index(self, index):
+        if index < 0:
             print("Error.")  # To be fixed.
             sys.exit(1)
 
-        return self.tasks[n]
+        return self.tasks[index]
+
+    # Return task whose name is 'name'
+    def get_by_name(self, name):
+        task_list = list(filter(lambda t:t.name == name, self.tasks))
+        #task_list = [t for t in self.tasks if t.name == name]
+
+        return task_list[0]
 
     # Return 'n' number of highest-priority tasks
     def get_top(self, n):
@@ -58,7 +65,7 @@ class TaskList:
             t.print()
 
 
-
+# Test code
 def main():
     # Initialize
     task_list = TaskList()
@@ -72,11 +79,12 @@ def main():
 
 
     print("# 0-th task")
-    task_list.get(0).print()
+    task_list.get_by_index(0).print()
     print("# change priority")
-    task_list.get(0).set_priority(5)
-    task_list.get(0).print()
+    task_list.get_by_index(0).set_priority(5)
+    task_list.get_by_index(0).print()
 
+    task_list.get_by_name("fizz").print()
     print()
     print("# All tasks")
     task_list.print()
