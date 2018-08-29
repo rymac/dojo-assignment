@@ -32,11 +32,11 @@ class TaskList:
 
     # Return n-th task
     def get_by_index(self, index):
-        if index < 0:
+        if index < 1:
             print("Error.")  # To be fixed.
             sys.exit(1)
 
-        return self.tasks[index]
+        return self.tasks[index + 1]
 
     # Return task whose name is 'name'
     def get_by_name(self, name):
@@ -60,8 +60,8 @@ class TaskList:
         return self.get_top(3)
 
     def print(self):
-        for t in self.tasks:
-            t.print()
+        for (i, task) in enumerate(self.tasks):
+            print("%2d:\t%2d\t%s" % (i+1, task.priority, task.name))
 
     # Save task list to CSV file
     def save_csv(self, file):
@@ -83,11 +83,11 @@ class TaskList:
 
     # Remove n-th task
     def rm_by_index(self, index):
-        if index < 0:
+        if index < 1:
             print("Error.")  # To be fixed.
             sys.exit(1)
 
-        self.tasks.pop(index)
+        self.tasks.pop(index - 1)
 
     # Remove tasks whose name is 'name'
     def rm_by_name(self, name):
