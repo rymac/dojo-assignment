@@ -64,12 +64,15 @@ class TaskList:
         for t in self.tasks:
             t.print()
 
-    def save_to(self, file):
+    # Save task list to CSV file
+    def save_csv(self, file):
         with open(file, "w") as f:
             for t in self.tasks:
                 f.write(t.name + ',' + str(t.priority) + '\n')
 
-    def load_from(self, file):
+    # Load task list from CSV file
+    def load_csv(self, file):
+        self.clear()
         with open(file, "r") as f:
             for line in f:
                 (name, priority) = line.rstrip('\r\n').split(",")
