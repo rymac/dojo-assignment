@@ -61,7 +61,7 @@ class TaskList:
 
     def print(self):
         for (i, task) in enumerate(self.tasks):
-            print("%2d:\t%2d\t%s" % (i+1, task.priority, task.name))
+            print("%2d:\t%3d\t%s" % (i+1, task.priority, task.name))
 
     # Save task list to CSV file
     def save_csv(self, file):
