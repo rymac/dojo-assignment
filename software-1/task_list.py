@@ -36,7 +36,7 @@ class TaskList:
             print("Error.")  # To be fixed.
             sys.exit(1)
 
-        return self.tasks[index + 1]
+        return self.tasks[index - 1]
 
     # Return task whose name is 'name'
     def get_by_name(self, name):
@@ -109,12 +109,14 @@ def main():
     task_list.extend(task_list2)
 
 
-    print("# 0-th task")
-    task_list.get_by_index(0).print()
+    print("# 1st task")
+    task_list.get_by_index(1).print()
     print("# change priority")
-    task_list.get_by_index(0).set_priority(5)
-    task_list.get_by_index(0).print()
+    task_list.get_by_index(1).set_priority(5)
+    task_list.get_by_index(1).print()
 
+    print()
+    print("# show a task named 'fizz'")
     task_list.get_by_name("fizz").print()
     print()
     print("# All tasks")
