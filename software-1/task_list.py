@@ -64,6 +64,18 @@ class TaskList:
         for t in self.tasks:
             t.print()
 
+    def save_to(self, file):
+        with open(file, "w") as f:
+            for t in self.tasks:
+                f.write(t.name + ',' + str(t.priority) + '\n')
+
+    def load_from(self, file):
+        with open(file, "r") as f:
+            for line in f:
+                (name, priority) = line.rstrip('\r\n').split(",")
+                self.add_task(name, int(priority))
+
+
 
 # Test code
 def main():
