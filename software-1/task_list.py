@@ -40,8 +40,7 @@ class TaskList:
 
     # Return task whose name is 'name'
     def get_by_name(self, name):
-        task_list = list(filter(lambda t:t.name == name, self.tasks))
-        #task_list = [t for t in self.tasks if t.name == name]
+        task_list = [t for t in self.tasks if t.name == name]
 
         return task_list[0]
 
@@ -78,6 +77,23 @@ class TaskList:
                 (name, priority) = line.rstrip('\r\n').split(",")
                 self.add_task(name, int(priority))
 
+    # Empty task list
+    def clear(self):
+        self.tasks = []
+
+    # Remove n-th task
+    def rm_by_index(self, index):
+        if index < 0:
+            print("Error.")  # To be fixed.
+            sys.exit(1)
+
+        self.tasks.pop(index)
+
+    # Remove tasks whose name is 'name'
+    def rm_by_name(self, name):
+        task_list = [t for t in self.tasks if t.name != name]
+
+        self.tasks = task_list
 
 
 # Test code
