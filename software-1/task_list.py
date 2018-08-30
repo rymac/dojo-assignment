@@ -17,8 +17,10 @@ class Task:
 
 
 class TaskList:
-    def __init__(self):
-        self.tasks = []
+    def __init__(self, tasks=None):
+        if tasks == None:
+            tasks = []
+        self.tasks = tasks
 
     def append(self, task):
         self.tasks.append(task)
