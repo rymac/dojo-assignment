@@ -37,26 +37,24 @@ class TaskList:
         if index < 1:
             print("Error.")  # To be fixed.
             sys.exit(1)
-
         return self.tasks[index - 1]
 
     # Return task whose name is 'name'
     def get_by_name(self, name):
-        task_list = [t for t in self.tasks if t.name == name]
+        filtered_tasks = [t for t in self.tasks if t.name == name]
+        return filtered_tasks[0]
 
-        return task_list[0]
+    def get_sorted(self):
+        sorted_tasks = sorted(self.tasks, key=lambda t: t.priority, reverse=True)
+        return TaskList(sorted_tasks)
 
     # Return 'n' number of highest-priority tasks
     def get_top(self, n):
         if n < 1:
             print("Error.")  # To be fixed.
             sys.exit(1)
-
-        top_tasks = sorted(self.tasks, key=lambda t: t.priority, reverse=True)[:n]
-        task_list = TaskList()
-        for task in top_tasks:
-            task_list.append(task)
-        return task_list
+        top_tasks = self.get_sorted().tasks[:n]
+        return TaskList(top_tasks)
 
     def get_top3(self):
         return self.get_top(3)
@@ -88,14 +86,12 @@ class TaskList:
         if index < 1:
             print("Error.")  # To be fixed.
             sys.exit(1)
-
         self.tasks.pop(index - 1)
 
     # Remove tasks whose name is 'name'
     def rm_by_name(self, name):
-        task_list = [t for t in self.tasks if t.name != name]
-
-        self.tasks = task_list
+        filtered_tasks = [t for t in self.tasks if t.name != name]
+        self.tasks = filtered_tasks
 
 
 # Test code
@@ -104,12 +100,18 @@ def main():
     task_list = TaskList()
     task_list.add_task("foo")
     task_list.add_task("bar", 10)
+    print("# task_list")
+    task_list.print()
+    print()
 
     task_list2 = TaskList()
     task_list2.append(Task("fizz"))
     task_list2.append(Task("buzz", 3))
-    task_list.extend(task_list2)
+    print("# task_list2")
+    task_list2.print()
+    print()
 
+    task_list.extend(task_list2)
 
     print("# 1st task")
     task_list.get_by_index(1).print()
@@ -123,6 +125,10 @@ def main():
     print()
     print("# All tasks")
     task_list.print()
+
+    print()
+    print("# Sorted tasks")
+    task_list.get_sorted().print()
 
     print()
     print("# Top 2")
