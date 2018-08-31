@@ -1,4 +1,5 @@
 import sys
+import os
 
 class Task:
     def __init__(self, name = "", priority = 0):
@@ -21,16 +22,21 @@ class TaskList:
         if tasks == None:
             tasks = []
         self.tasks = tasks
+        self.file = ""
+        self.modified = False
 
     def append(self, task):
         self.tasks.append(task)
+        self.modified = True
 
     # Not needed in homework.
     def extend(self, task_list):
         self.tasks.extend(task_list.tasks)
+        self.modified = True
 
     def add_task(self, name, priority=0):
         self.append(Task(name, priority))
+        self.modified = True
 
     # Return n-th task
     def get_by_index(self, index):
@@ -64,18 +70,40 @@ class TaskList:
             print("%2d:\t%3d\t%s" % (i+1, task.priority, task.name))
 
     # Save task list to CSV file
-    def save_csv(self, file):
+    def save_csv(self, file="", force=False):
+        if os.path.exists(file) and file != self.file:
+            if not force:
+                print("File already exits. To overwrite it, `save_csv('%s', force=True)`" % file)
+                return
+        else:
+            if file == "":
+                file = self.file
+            print("Save data to '%s'" % file)
+
         with open(file, "w") as f:
             for t in self.tasks:
                 f.write(t.name + ',' + str(t.priority) + '\n')
+        self.file = file
+        self.modified = False
 
     # Load task list from CSV file
-    def load_csv(self, file):
+    def load_csv(self, file, force=False):
+        if not os.path.exists(file):
+            print("'%s' does not exit." % file)
+            return
+
+        if self.modified and not force:
+            print("Task list has been modified. To discard the change, `load_csv('%s', force=True)`" % file)
+            return
+
+        print("Load data from '%s'" % file)
         self.clear()
         with open(file, "r") as f:
             for line in f:
                 (name, priority) = line.rstrip('\r\n').split(",")
                 self.add_task(name, int(priority))
+        self.file = file
+        self.modified = False
 
     # Empty task list
     def clear(self):
