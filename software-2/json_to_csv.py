@@ -1,19 +1,26 @@
 import sys
-import os
 import json
 
-def json_file_to_csv_string(json_file):
-    if os.path.exists(json_file):
+def convert_json_file_to_csv_string(json_file):
+    json_dict = open_json_file(json_file)
+    csv_str = generate_csv_from_json(json_dict)
+    return csv_str
+
+
+def open_json_file(json_file):
+    try:
         with open(json_file, "r") as f:
             json_dict = json.load(f)
-    else:
-        print("Error: No file at %s" % json_file)
+        return json_dict
+    except Exception as e:
+        print("Error:", e)
         sys.exit()
 
+
+def generate_csv_from_json(json_dict):
     csv_str = ('ITEM_NUMBER, DEFINE, REPAIR, PREVENT\n')
     for (i, item) in enumerate(json_dict):
         csv_str += '%d, "%s", "%s", "%s"\n' % (i+1, item['DEFINE'], item['REPAIR'], item['PREVENT'])
-
     return csv_str
 
 
@@ -25,11 +32,9 @@ def main():
     else:
         json_file = sys.argv[1]
 
-    csv_str = json_file_to_csv_string(json_file)
+    csv_str = convert_json_file_to_csv_string(json_file)
     print(csv_str)
 
 
 if __name__ == "__main__":
     main()
-
-
