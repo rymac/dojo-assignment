@@ -1,14 +1,28 @@
 [
     {
-        "DEFINE":"fear 1",
-        "REPAIR":"repair 1",
-        "PREVENT":"prevent 1"
+        "DEFINE":"Violate TMC’s work rules",
+        "REPAIR":"Submit applications of leaving work every time I take a break.",
+        "PREVENT":"Have no idea."
     },
     {
-        "DEFINE":"fear 2",
-        "REPAIR":"repair 2",
-        "PREVENT":"prevent 2"
+        "DEFINE":"Boss gets angry.",
+        "REPAIR":"Tell the boss before taking a break.",
+        "PREVENT":"Apologize to my boss."
+    },
+    {
+        "DEFINE":"Boss has the impression that I don’t work so much and the evaluation falls.",
+        "REPAIR":"Change the rules and mindsets to evaluate based on the achievements instead of working hours.",
+        "PREVENT":"Have no idea."
+    },
+    {
+        "DEFINE":"Salary decreases as work hours become shorter.",
+        "REPAIR":"Change the work system to flex time and evaluate based on the achievements.",
+        "PREVENT":"Have no idea."
+    },
+    {
+        "DEFINE":"Taking a long break and 8-hours work cause late returning to my home.",
+        "REPAIR":"Go to the office earlier in the morning. Or change the work system to flex time that doesn’t require 8-hours work every day.",
+        "PREVENT":"Apologize to my wife."
     }
 ]
-
 
