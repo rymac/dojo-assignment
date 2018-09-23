@@ -9,12 +9,20 @@ def convert_json_file_to_csv_string(json_file):
 
 def open_json_file(json_file):
     try:
-        with open(json_file, "r") as f:
-            json_dict = json.load(f)
-        return json_dict
+        return read_json_dict_from_json_file(json_file)
     except Exception as e:
-        print("Error:", e)
-        sys.exit()
+        print_error_and_exit(e)
+
+
+def read_json_dict_from_json_file(json_file):
+    with open(json_file, "r") as f:
+        json_dict = json.load(f)
+    return json_dict
+
+
+def print_error_and_exit(e):
+    print("Error:", e)
+    sys.exit()
 
 
 def generate_csv_from_json(json_dict):
