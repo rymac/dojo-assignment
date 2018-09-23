@@ -26,9 +26,9 @@ def print_error_and_exit(e):
 
 
 def generate_csv_from_json(json_dict):
-    csv_str = ('ITEM_NUMBER, DEFINE, REPAIR, PREVENT\n')
+    csv_str = ('ITEM_NUMBER, DEFINE, PREVENT, REPAIR\n')
     for (i, item) in enumerate(json_dict):
-        csv_str += '%d, "%s", "%s", "%s"\n' % (i+1, item['DEFINE'], item['REPAIR'], item['PREVENT'])
+        csv_str += '%d, "%s", "%s", "%s"\n' % (i+1, item['DEFINE'], item['PREVENT'], item['REPAIR'])
     return csv_str
 
 
