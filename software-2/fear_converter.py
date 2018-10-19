@@ -26,11 +26,6 @@ class FearConverter:
             self.fears_json = json.load(f)
 
 
-    def _print_error_and_exit(self, e):
-        print("Error:", e)
-        sys.exit()
-
-
     def _generate_csv_from_json(self):
         self._add_csv_header()
         self._add_csv_body()
@@ -41,10 +36,21 @@ class FearConverter:
 
 
     def _add_csv_body(self):
-        for (i, fear) in enumerate(self.fears_json):
-            fear_csv = '%d, "%s", "%s", "%s"\n' \
-                       % (i+1, fear['DEFINE'], fear['PREVENT'], fear['REPAIR'])
-            self.result_csv += fear_csv
+        try:
+            for (i, fear) in enumerate(self.fears_json):
+                fear_csv = '%d, "%s", "%s", "%s"\n' \
+                           % (i+1, fear['DEFINE'], fear['PREVENT'],
+                              fear['REPAIR'])
+                self.result_csv += fear_csv
+        except Exception as e:
+            # Each items in self.fears_json is expected to have keys 'DEFINE',
+            # 'PREVENT', 'REPAIR'. Otherwise, an error occurs.
+            self._print_error_and_exit(e)
+
+
+    def _print_error_and_exit(self, e):
+        print("Error:", e)
+        sys.exit()
 
 
 def main():
