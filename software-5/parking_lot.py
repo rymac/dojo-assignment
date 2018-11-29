@@ -27,6 +27,7 @@ class ParkingLot:
     def empty_spot(self, id):
         self.spots[id].set_empty()
 
+
 class ParkingSpot:
     def __init__(self, id=None, size=None, floor=None):
         self.id = id
@@ -50,6 +51,7 @@ class ParkingSpot:
     def set_full(self):
         self.state = 1
 
+
 if __name__=='__main__':
     # test
     parking_lot = ParkingLot()
@@ -58,7 +60,7 @@ if __name__=='__main__':
     parking_lot.add_parking_spots(1, PARKING_SIZE_L, 1)
     parking_lot.add_parking_spots(2, PARKING_SIZE_S, 1)
     parking_lot.add_parking_spots(2, PARKING_SIZE_M, 1)
-    parking_lot.add_parking_spots(3, PARKING_SIZE_M, 3)
+    parking_lot.add_parking_spots(3, PARKING_SIZE_M, 2)
     for spot in parking_lot.spots:
         spot.print()
     print()
@@ -70,7 +72,7 @@ if __name__=='__main__':
 
         id = parking_lot.get_empty_spot_id(size)
         if id != None:
-            print("slot #{:d} at {:d}F".format(id, parking_lot.spots[id].floor))
+            print("slot #{:d} ({}) at {:d}F".format(id, parking_size[parking_lot.spots[id].size], parking_lot.spots[id].floor))
             parking_lot.park_at_spot(id)
         else:
             print("Parking lot is full")
